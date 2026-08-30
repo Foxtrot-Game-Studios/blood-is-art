@@ -5,7 +5,10 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-const CAM_SENS = 0.002
+const CAM_SENS = 0.005
+
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -31,3 +34,12 @@ func _input(event: InputEvent) -> void:
 		rotation.y -= event.relative.x * CAM_SENS
 		spring_arm.rotation.x -= event.relative.y * CAM_SENS
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -PI/4, PI/3)
+		
+	if event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if event.is_action_pressed("left_click"):
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			get_viewport().set_input_as_handled()
+	
