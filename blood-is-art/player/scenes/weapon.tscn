@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://btag5ny2y747i"]
+
+[ext_resource type="Script" uid="uid://8v6y4qmx6l7" path="res://player/scripts/weapon.gd" id="1_gp1vf"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8h4do"]
+top_radius = 0.15
+bottom_radius = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i76ds"]
+top_radius = 0.0
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i76ds"]
+radius = 0.15
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gp1vf"]
+height = 1.0
+radius = 0.075
+
+[node name="Weapon" type="StaticBody3D" unique_id=325779242]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_gp1vf")
+
+[node name="Blade" type="MeshInstance3D" parent="." unique_id=1191876836]
+mesh = SubResource("CylinderMesh_8h4do")
+
+[node name="Tip" type="MeshInstance3D" parent="." unique_id=1329480294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CylinderMesh_i76ds")
+
+[node name="BladeCollision" type="CollisionShape3D" parent="." unique_id=1110608952]
+shape = SubResource("CylinderShape3D_i76ds")
+
+[node name="TipCollision" type="CollisionShape3D" parent="." unique_id=2079691829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_gp1vf")
+
+[node name="AttackHitbox" type="Area3D" parent="." unique_id=180679522]
+collision_layer = 4
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="BladeCollision" type="CollisionShape3D" parent="AttackHitbox" unique_id=1185640601]
+shape = SubResource("CylinderShape3D_i76ds")
+
+[node name="TipCollision" type="CollisionShape3D" parent="AttackHitbox" unique_id=1016245559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_gp1vf")
+
+[connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
