@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://cy52np4nn4qxu"]
 
 [ext_resource type="PackedScene" uid="uid://ccxam0svr5614" path="res://player/scenes/player.tscn" id="1_6xmxd"]
+[ext_resource type="Texture2D" uid="uid://btibfiwo82eo1" path="res://test.png" id="1_tcf2h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss2ar"]
+albedo_texture = ExtResource("1_tcf2h")
 
 [sub_resource type="BoxMesh" id="BoxMesh_p1u0j"]
+material = SubResource("StandardMaterial3D_ss2ar")
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g312j"]
