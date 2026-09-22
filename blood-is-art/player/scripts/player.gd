@@ -1,7 +1,9 @@
 extends CharacterBody3D
 
+@onready var player_camera: Camera3D = $SpringArm3D/Camera3D
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var weapon: StaticBody3D = $Weapon
+@onready var marker: Marker3D = $Marker3D
 
 const APPROX_ZERO: float = 0.001
 
@@ -73,3 +75,16 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 		else:
 			weapon.attack()
+			
+
+func dropItem() -> void:
+	var distance: float = 2.0
+	var forward_dir: Vector3 = -player_camera.global_transform.basis.z.normalized()
+	var target_pos: Vector3 = player_camera.global_transform.origin + forward_dir * distance
+	
+	var space_state = marker.get_world_3d().direct_space_state
+	
+	var obstacle_params = PhysicsRayQueryParameters3D.new()
+	obstacle_params.from = player_camera.global_transform.origin
+	obstacle_params.to = target_pos
+	obstacle_params.exclude = [marker.get_parent()]

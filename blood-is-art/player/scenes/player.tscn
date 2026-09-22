@@ -25,3 +25,5 @@ spring_length = 5.0
 
 [node name="Weapon" parent="." unique_id=325779242 instance=ExtResource("2_t0cpu")]
 transform = Transform3D(0.18301266, 0.18301266, 0.9659258, -0.70710677, 0.70710677, 0, -0.68301266, -0.68301266, 0.258819, 0.8, 0, 0)
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1114711362]
