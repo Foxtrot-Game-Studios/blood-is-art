@@ -11,8 +11,3 @@ func _process(delta: float) -> void:
 		print("drop item")
 		
 	pass
-
-func dropItem() -> void:
-	var distance: float = 2.0
-	var forwardDistance: Vector3 = -player_camera.global_transform.basis.z.normalized()
-	var 
