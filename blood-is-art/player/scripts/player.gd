@@ -82,16 +82,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("drop"):
 		dropItem()
 
-func dropItem() -> void:
-	var space_state: PhysicsDirectSpaceState3D = player_camera.get_world_3d().direct_space_state
+func dropItem() -> void: #j key
+	var space_state: PhysicsDirectSpaceState3D = spring_arm.get_world_3d().direct_space_state #queries collisions
 
-	var drop_distance: float = 9.0
-	var forward_dir: Vector3 = -player_camera.global_transform.basis.z.normalized()
-	var start_offset: float = 0.5 
-	var target_pos: Vector3 = player_camera.global_transform.origin + forward_dir * drop_distance
-	var obstacle_params = PhysicsRayQueryParameters3D.new()
+	var drop_distance: float = 3.5 #how far from player
+	var forward_dir: Vector3 = -spring_arm.global_transform.basis.z.normalized() # camera location
+	var target_pos: Vector3 = spring_arm.global_transform.origin + forward_dir * drop_distance  #end locationvector
+	
+	# look for obstacles contacting the ray
+	var obstacle_params = PhysicsRayQueryParameters3D.new() 
 	obstacle_params.collision_mask = 1
-	obstacle_params.from = player_camera.global_transform.origin + forward_dir * start_offset
+	obstacle_params.from = player_camera.global_transform.origin + forward_dir 
 	obstacle_params.to = target_pos
 	obstacle_params.exclude = [self, weapon]
 	var obstacle_hit: Dictionary = space_state.intersect_ray(obstacle_params)
@@ -99,13 +100,14 @@ func dropItem() -> void:
 		print("Cannot drop: path blocked", obstacle_hit.collider.name)
 		return
 
+	#find the ground
 	var ground_params = PhysicsRayQueryParameters3D.new()
-	ground_params.from = target_pos + Vector3.UP * 1.0
-	ground_params.to = target_pos + Vector3.DOWN * 5.0
+	ground_params.from = target_pos + Vector3.UP * 1.0 # a ray from here 
+	ground_params.to = target_pos + Vector3.DOWN * 5.0 #to here
 	ground_params.exclude = [self, weapon]
 	ground_params.collision_mask = 1
-	var ground_hit: Dictionary = space_state.intersect_ray(ground_params)
-	if ground_hit.is_empty():
+	var ground_hit: Dictionary = space_state.intersect_ray(ground_params) # vector where ground is
+	if ground_hit.is_empty(): # if there is no ground don't drop
 		print("Cannot drop: no ground")
 		return
 
@@ -113,7 +115,7 @@ func dropItem() -> void:
 	get_tree().current_scene.add_child(dropped_weapon)
 	
 	var buffer_height: float = 0.2
-	var target_ground_pos: Vector3 = ground_hit.position + Vector3(0, buffer_height, 0)
+	var target_ground_pos: Vector3 = ground_hit.position + Vector3(0, buffer_height, 0) * 2.5
 	var spawn_air_pos: Vector3 = target_ground_pos + Vector3(0, 1.5, 0)
 	
 	dropped_weapon.global_position = spawn_air_pos
