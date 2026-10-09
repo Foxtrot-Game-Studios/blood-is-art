@@ -15,9 +15,10 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Blood is Art"
-run/main_scene="uid://ccxam0svr5614"
+run/main_scene="uid://cy52np4nn4qxu"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+<<<<<<<HEADrun/main_scene="uid://ccxam0svr5614"
 
 [editor_plugins]
 
