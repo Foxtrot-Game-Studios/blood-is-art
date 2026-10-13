@@ -20,6 +20,10 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="uid://ccxam0svr5614"
 
+[autoload]
+
+globals="*uid://b5a30ktv6n0ny"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
