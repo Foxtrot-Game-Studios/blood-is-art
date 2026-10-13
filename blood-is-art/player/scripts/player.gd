@@ -26,6 +26,13 @@ var sprinting: bool = false
 var sprint_boost: Vector3 = Vector3.ZERO
 var last_movement: Vector2 = Vector2.ZERO
 
+func _enter_tree() -> void:
+	globals.player = self
+
+func _exit_tree() -> void:
+	if globals.player == self:
+		globals.player = null
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	collision_shape_max_height = collision_shape_3d.shape.height
@@ -74,7 +81,6 @@ func _physics_process(delta: float) -> void:
 	if velocity.z <= APPROX_ZERO and velocity.z >= -APPROX_ZERO:
 		velocity.z = 0.0
 	
-	print(collision_shape_3d.shape.height)
 	mesh_instance_3d.mesh.height = collision_shape_3d.shape.height
 	
 	move_and_slide()
