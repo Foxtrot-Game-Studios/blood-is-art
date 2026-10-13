@@ -3,8 +3,10 @@ extends CharacterBody3D
 @onready var player_camera: Camera3D = $SpringArm3D/Camera3D
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var weapon: StaticBody3D = $Weapon
-
+@onready var weaponBladeCollision: CollisionShape3D = $Weapon/BladeCollision
+@onready var weaponTipCollision: CollisionShape3D = $Weapon/TipCollision
 @onready var marker: Marker3D = $Marker3D
+@onready var weaponHitBox: Area3D = $Weapon/AttackHitbox
 
 var player_pos: Vector3 = global_position
 var weapon_scene = preload("../scenes/weapon.tscn")
@@ -123,7 +125,7 @@ func dropItem() -> void: #j key
 	obstacle_params.collision_mask = 1
 	obstacle_params.from = player_camera.global_transform.origin + forward_dir 
 	obstacle_params.to = target_pos
-	obstacle_params.exclude = [self, weapon]
+	obstacle_params.exclude = [self.get_rid(), weapon.get_rid(), weaponHitBox.get_rid(), get_node("/root/World/StaticBody3DW").get_rid()]
 	var obstacle_hit: Dictionary = space_state.intersect_ray(obstacle_params)
 	if not obstacle_hit.is_empty():
 		print("Cannot drop: path blocked", obstacle_hit.collider.name)
@@ -133,7 +135,7 @@ func dropItem() -> void: #j key
 	var ground_params = PhysicsRayQueryParameters3D.new()
 	ground_params.from = target_pos + Vector3.UP * 1.0 # a ray from here 
 	ground_params.to = target_pos + Vector3.DOWN * 5.0 #to here
-	ground_params.exclude = [self, weapon]
+	ground_params.exclude = [self.get_rid(), weapon.get_rid(), weaponHitBox.get_rid(), get_tree().get_first_node_in_group("World")]
 	ground_params.collision_mask = 1
 	var ground_hit: Dictionary = space_state.intersect_ray(ground_params) # vector where ground is
 	if ground_hit.is_empty(): # if there is no ground don't drop
