@@ -19,6 +19,10 @@ run/main_scene="uid://cy52np4nn4qxu"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+globals="*uid://b5a30ktv6n0ny"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
@@ -72,5 +76,4 @@ inventory={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.mobile="forward_plus"
