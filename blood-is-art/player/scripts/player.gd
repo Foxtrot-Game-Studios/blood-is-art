@@ -1,7 +1,16 @@
 extends CharacterBody3D
 
+@onready var player_camera: Camera3D = $SpringArm3D/Camera3D
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var weapon: StaticBody3D = $Weapon
+@onready var weaponBladeCollision: CollisionShape3D = $Weapon/BladeCollision
+@onready var weaponTipCollision: CollisionShape3D = $Weapon/TipCollision
+@onready var marker: Marker3D = $Marker3D
+@onready var weaponHitBox: Area3D = $Weapon/AttackHitbox
+
+var player_pos: Vector3 = global_position
+var weapon_scene = preload("../scenes/weapon.tscn")
+
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var mesh_instance_3d: MeshInstance3D = $"MeshInstance3D"
 
@@ -100,3 +109,56 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 		else:
 			weapon.attack()
+	
+	if event.is_action_pressed("drop"):
+		dropItem()
+
+func dropItem() -> void: #j key
+	var space_state: PhysicsDirectSpaceState3D = spring_arm.get_world_3d().direct_space_state #queries collisions
+
+	var drop_distance: float = 3.5 #how far from player
+	var forward_dir: Vector3 = -spring_arm.global_transform.basis.z.normalized() # camera location
+	var target_pos: Vector3 = spring_arm.global_transform.origin + forward_dir * drop_distance  #end locationvector
+	
+	# look for obstacles contacting the ray
+	var obstacle_params = PhysicsRayQueryParameters3D.new() 
+	obstacle_params.collision_mask = 1
+	obstacle_params.from = player_camera.global_transform.origin + forward_dir 
+	obstacle_params.to = target_pos
+	obstacle_params.exclude = [self.get_rid(), weapon.get_rid(), weaponHitBox.get_rid(), get_node("/root/World/StaticBody3DW").get_rid()]
+	var obstacle_hit: Dictionary = space_state.intersect_ray(obstacle_params)
+	if not obstacle_hit.is_empty():
+		print("Cannot drop: path blocked", obstacle_hit.collider.name)
+		return
+
+	#find the ground
+	var ground_params = PhysicsRayQueryParameters3D.new()
+	ground_params.from = target_pos + Vector3.UP * 1.0 # a ray from here 
+	ground_params.to = target_pos + Vector3.DOWN * 5.0 #to here
+	ground_params.exclude = [self.get_rid(), weapon.get_rid(), weaponHitBox.get_rid(), get_tree().get_first_node_in_group("World")]
+	ground_params.collision_mask = 1
+	var ground_hit: Dictionary = space_state.intersect_ray(ground_params) # vector where ground is
+	if ground_hit.is_empty(): # if there is no ground don't drop
+		print("Cannot drop: no ground")
+		return
+
+	var dropped_weapon = weapon_scene.instantiate()
+	get_tree().current_scene.add_child(dropped_weapon)
+	
+	var buffer_height: float = 0.2
+	var target_ground_pos: Vector3 = ground_hit.position + Vector3(0, buffer_height, 0) * 2.5
+	var spawn_air_pos: Vector3 = target_ground_pos + Vector3(0, 1.5, 0)
+	
+	dropped_weapon.global_position = spawn_air_pos
+	
+	var target_scale := Vector3(0.5, 0.5, 0.5)
+	
+	var tween := create_tween().set_parallel(true)
+	
+	tween.tween_property(dropped_weapon, "global_position", target_ground_pos, 0.5)\
+		.set_trans(Tween.TRANS_BOUNCE)\
+		.set_ease(Tween.EASE_OUT)
+		
+	tween.tween_property(dropped_weapon, "scale", target_scale, 0.5)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
