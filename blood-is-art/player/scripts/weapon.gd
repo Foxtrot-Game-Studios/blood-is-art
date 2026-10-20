@@ -15,8 +15,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	#print(weaponTimer.is_stopped())
-	pass
+	print(weaponTimer.is_stopped())
 
 func attack() -> void:
 	if !attacking and !cooldown:
