@@ -28,6 +28,10 @@ globals="*uid://b5a30ktv6n0ny"
 
 enabled=PackedStringArray()
 
+[global_group]
+
+player=""
+
 [input]
 
 forward={
