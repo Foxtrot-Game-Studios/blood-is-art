@@ -9,7 +9,7 @@ extends CharacterBody3D
 @onready var weaponHitBox: Area3D = $Weapon/AttackHitbox
 @onready var ground : StaticBody3D = $"../StaticBody3D"
 
-var player_pos: Vector3 = global_position
+var player_pos: Vector3
 var weapon_scene = preload("../scenes/weapon.tscn")
 
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
@@ -45,6 +45,7 @@ func _exit_tree() -> void:
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	player_pos = global_position
 	collision_shape_max_height = collision_shape_3d.shape.height
 
 func _physics_process(delta: float) -> void:
