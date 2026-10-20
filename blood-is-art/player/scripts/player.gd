@@ -114,6 +114,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("drop"):
 		dropItem()
+	
 
 func dropItem() -> void: #j key
 	var space_state: PhysicsDirectSpaceState3D = spring_arm.get_world_3d().direct_space_state #queries collisions
