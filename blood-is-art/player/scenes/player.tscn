@@ -24,4 +24,4 @@ spring_length = 5.0
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1441334681]
 
 [node name="Weapon" parent="." unique_id=325779242 instance=ExtResource("2_t0cpu")]
-transform = Transform3D(0.18301266, 0.18301266, 0.9659258, -0.70710677, 0.70710677, 0, -0.68301266, -0.68301266, 0.258819, 0.8, 0, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.8, 0, 0)
