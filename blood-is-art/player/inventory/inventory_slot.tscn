@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://btyk3duvxqgc5"]
+
+[ext_resource type="Script" uid="uid://vmptl1cgfm6b" path="res://player/inventory/inventory_slot.gd" id="1_lrksu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy1q7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42eed"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0.7176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72255445, 0.7225545, 0.72255427, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5bh6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72156864, 0.72156864, 0.72156864, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 10
+
+[node name="InventorySlot" type="Button" unique_id=256918308]
+custom_minimum_size = Vector2(70, 70)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jy1q7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_42eed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f5bh6")
+script = ExtResource("1_lrksu")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1231448497]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(68, 68)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -14,6 +14,9 @@ var weapon_scene = preload("../scenes/weapon.tscn")
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var mesh_instance_3d: MeshInstance3D = $"MeshInstance3D"
 
+#inventory 
+@onready var inventory_controller = %InventoryController/CanvasLayer/InventoryUI
+
 const APPROX_ZERO: float = 0.001
 const MIN_LERP: float = 0.01
 const MAX_LERP: float = 0.99
@@ -113,7 +116,14 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("drop"):
 		dropItem()
-	
+		
+	if event.is_action_pressed("inventory"):
+		if inventory_controller.visible == true:
+			inventory_controller.visible = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else: 
+			inventory_controller.visible = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func dropItem() -> void: #j key
 	var space_state: PhysicsDirectSpaceState3D = spring_arm.get_world_3d().direct_space_state #queries collisions
