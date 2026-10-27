@@ -1,5 +1,4 @@
 extends CharacterBody3D
-
 @onready var player_camera: Camera3D = $SpringArm3D/Camera3D
 @onready var spring_arm: SpringArm3D = $SpringArm3D
 @onready var weapon: StaticBody3D = $Weapon

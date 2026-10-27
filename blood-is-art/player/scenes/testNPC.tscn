@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://djfek3uyfc67c"]
+
+[ext_resource type="Script" uid="uid://dyqebh1sk5ovq" path="res://npcCollision.gd" id="1_c8nu0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0wyx5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_23g4j"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7rmln"]
+
+[node name="Node3D" type="Node3D" unique_id=9930169]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1418845958]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1701092444 groups=["player"]]
+mesh = SubResource("CapsuleMesh_0wyx5")
+
+[node name="Area3D" type="Area3D" parent="CharacterBody3D" unique_id=599846919]
+script = ExtResource("1_c8nu0")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D/Area3D" unique_id=887379365]
+shape = SubResource("CapsuleShape3D_23g4j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=560343492]
+shape = SubResource("CapsuleShape3D_7rmln")
+
+[connection signal="area_entered" from="CharacterBody3D/Area3D" to="CharacterBody3D/Area3D" method="_on_area_entered"]
+[connection signal="area_exited" from="CharacterBody3D/Area3D" to="CharacterBody3D/Area3D" method="_on_area_exited"]
