@@ -4,15 +4,21 @@ extends StaticBody3D
 @onready var weaponTip: MeshInstance3D = $Tip
 
 @onready var weaponTimer: Timer = $HitTimer
+
+var midTransform: Vector3 = Vector3(-PI/2, 0, 0)
+var startTransform: Vector3 = Vector3(0, 0, 0)
+
 var attacking: bool = false
 var cooldown: bool = false
 
 #TODO: Change to fit animation
 const attackTime = 1;
 const cooldownTime = 2;
+const ANIMATION_SPEED: float = 25
 
 func _ready() -> void:
 	pass
+	
 
 func _process(delta: float) -> void:
 	#print(weaponTimer.is_stopped())
@@ -40,10 +46,18 @@ func _on_hit_timer_timeout() -> void:
 		weaponTip.mesh.material.albedo_color = Color(0.0,0,0)
 		cooldown = true
 		attacking = false
-		attack_hitbox.monitorable = false
+		attack_hitbox.monitoring = false
 	elif cooldown:
 		weaponTimer.wait_time=cooldownTime
 		weaponTip.mesh.material.albedo_color = Color(0,1,1)
 		cooldown = false
 	weaponTimer.start()
 		
+		
+func _physics_process(delta: float) -> void:
+	if attacking:
+		rotation = lerp(rotation, midTransform, ANIMATION_SPEED * delta)
+	else:
+		rotation = lerp(rotation, startTransform, ANIMATION_SPEED * delta)
+		
+	
