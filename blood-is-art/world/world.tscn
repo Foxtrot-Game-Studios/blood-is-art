@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://ccxam0svr5614" path="res://player/scenes/player.tscn" id="1_6xmxd"]
 [ext_resource type="Texture2D" uid="uid://btibfiwo82eo1" path="res://test.png" id="1_tcf2h"]
-[ext_resource type="PackedScene" uid="uid://c00ykce1tq5it" path="res://dummy.tscn" id="3_4717r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss2ar"]
 albedo_texture = ExtResource("1_tcf2h")
@@ -30,6 +29,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1601861235]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 12, 0)
-
-[node name="Dummy" parent="." unique_id=1775106229 instance=ExtResource("3_4717r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
