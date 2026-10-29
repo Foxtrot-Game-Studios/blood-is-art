@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 func attack() -> void:
 	if !attacking and !cooldown:
 		attack_hitbox.monitoring = true
+		attack_hitbox.monitorable = true
 		weaponTip.mesh.material.albedo_color = Color(1.0,0,0)
 		weaponTimer.wait_time = attackTime
 		attacking = true
@@ -47,6 +48,7 @@ func _on_hit_timer_timeout() -> void:
 		cooldown = true
 		attacking = false
 		attack_hitbox.monitoring = false
+		attack_hitbox.monitorable = false
 	elif cooldown:
 		weaponTimer.wait_time=cooldownTime
 		weaponTip.mesh.material.albedo_color = Color(0,1,1)

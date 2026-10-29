@@ -7,10 +7,15 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dfv1y"]
 material = SubResource("StandardMaterial3D_gtj52")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dfv1y"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gp1vf"]
+radius = 1.42
+height = 3.13
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a2sw0"]
+size = Vector3(1, 2, 1)
 
 [node name="Dummy" type="RigidBody3D" unique_id=1775106229]
-collision_layer = 5
+collision_layer = 0
 collision_mask = 9
 script = ExtResource("1_gtj52")
 
@@ -19,14 +24,18 @@ layers = 4
 mesh = SubResource("CapsuleMesh_dfv1y")
 
 [node name="Hitbox" type="Area3D" parent="." unique_id=1076438764]
+collision_layer = 5
+collision_mask = 4
 
 [node name="HitboxCollision" type="CollisionShape3D" parent="Hitbox" unique_id=585196788]
-shape = SubResource("CapsuleShape3D_dfv1y")
+shape = SubResource("CapsuleShape3D_gp1vf")
 
 [node name="PhysicsCollision" type="CollisionShape3D" parent="." unique_id=1107382071]
-shape = SubResource("CapsuleShape3D_dfv1y")
+shape = SubResource("BoxShape3D_a2sw0")
 
 [node name="InvincibilityTimer" type="Timer" parent="." unique_id=863433665]
 
+[connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
