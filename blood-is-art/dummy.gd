@@ -3,6 +3,8 @@ extends RigidBody3D
 @onready var invincibility_timer = $InvincibilityTimer
 @onready var self_mesh = $SelfMesh
 
+signal hurt
+
 
 #func _on_hitbox_body_entered(body: Node3D) -> void:
 	#print(body.collision_layer)
@@ -29,3 +31,4 @@ func _on_hitbox_area_shape_entered(area_rid: RID, area: Area3D, area_shape_index
 		print("OW OW OW OW")
 		invincibility_timer.start()
 		self_mesh.mesh.material.albedo_color = Color(1.0, 0.0, 0.0, 1.0)
+		hurt.emit()
