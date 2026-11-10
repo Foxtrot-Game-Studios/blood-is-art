@@ -3,12 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://btibfiwo82eo1" path="res://test.png" id="1_rf5xd"]
 [ext_resource type="PackedScene" uid="uid://ccxam0svr5614" path="res://player/scenes/player.tscn" id="2_jvmqm"]
 [ext_resource type="Script" uid="uid://c8q7q4gifye4d" path="res://world/scripts/minimap_camera.gd" id="3_65od5"]
+[ext_resource type="PackedScene" uid="uid://djfek3uyfc67c" path="res://world/scenes/testNPC.tscn" id="4_jvmqm"]
+[ext_resource type="PackedScene" uid="uid://dy1yebe5adiev" path="res://world/scenes/testBuilding.tscn" id="5_65od5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss2ar"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65od5"]
 albedo_texture = ExtResource("1_rf5xd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_p1u0j"]
-material = SubResource("StandardMaterial3D_ss2ar")
+material = SubResource("StandardMaterial3D_65od5")
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g312j"]
@@ -59,3 +61,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2
 projection = 1
 size = 25.0
 script = ExtResource("3_65od5")
+
+[node name="Node3D" parent="." unique_id=9930169 instance=ExtResource("4_jvmqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3025727, 1.9589944, 0)
+
+[node name="Node3D2" parent="." unique_id=41212621 instance=ExtResource("5_65od5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6802921, 2.6382952, -14.329468)
