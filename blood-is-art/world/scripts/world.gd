@@ -11,8 +11,8 @@ func _on_hurt():
 	var newBlood = blood.duplicate()
 	
 	newBlood.position = dummy.position
-	newBlood.position.x = randf_range(-2.0, 2.0)
-	newBlood.position.z = randf_range(-2.0, 2.0)
+	newBlood.position.x += randf_range(-2.0, 2.0)
+	newBlood.position.z += randf_range(-2.0, 2.0)
 	newBlood.show()
 	
 	add_child(newBlood)
