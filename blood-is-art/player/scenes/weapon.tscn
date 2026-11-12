@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://btag5ny2y747i"]
 
 [ext_resource type="Script" uid="uid://8v6y4qmx6l7" path="res://player/scripts/weapon.gd" id="1_gp1vf"]
-[ext_resource type="Script" uid="uid://bfimkncb0y7gf" path="res://player/scenes/weaponCollision.gd" id="2_a2sw0"]
+[ext_resource type="Script" uid="uid://bfimkncb0y7gf" path="res://player/scripts/weaponCollision.gd" id="2_a2sw0"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_8h4do"]
 top_radius = 0.15

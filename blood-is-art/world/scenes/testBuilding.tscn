@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dy1yebe5adiev"]
+
+[ext_resource type="Script" uid="uid://cf74gkvlhcyp6" path="res://world/scripts/buildingCollision.gd" id="1_hrm4q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7rmln"]
+radius = 1.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_23g4j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rmln"]
+
+[node name="Node3D" type="Node3D" unique_id=41212621]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=116416205]
+
+[node name="Area3D" type="Area3D" parent="StaticBody3D" unique_id=1872262436]
+script = ExtResource("1_hrm4q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D" unique_id=796959459]
+shape = SubResource("SphereShape3D_7rmln")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1296748125]
+mesh = SubResource("BoxMesh_23g4j")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1577563181]
+shape = SubResource("BoxShape3D_7rmln")
+
+[connection signal="area_entered" from="StaticBody3D/Area3D" to="StaticBody3D/Area3D" method="_on_area_entered"]

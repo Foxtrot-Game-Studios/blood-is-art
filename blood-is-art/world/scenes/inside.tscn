@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cqbgiluiws0r7"]
+
+[ext_resource type="Texture2D" uid="uid://btibfiwo82eo1" path="res://test.png" id="1_r8opg"]
+[ext_resource type="PackedScene" uid="uid://ccxam0svr5614" path="res://player/scenes/player.tscn" id="2_7ujdm"]
+[ext_resource type="PackedScene" uid="uid://dy1yebe5adiev" path="res://world/scenes/testBuilding.tscn" id="3_beyhg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss2ar"]
+albedo_texture = ExtResource("1_r8opg")
+
+[sub_resource type="BoxMesh" id="BoxMesh_touke"]
+material = SubResource("StandardMaterial3D_ss2ar")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gskfx"]
+size = Vector3(100, 1, 100)
+
+[node name="Node3D" type="Node3D" unique_id=1306540215]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1680747180]
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1998028801]
+mesh = SubResource("BoxMesh_touke")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=847917608]
+shape = SubResource("BoxShape3D_gskfx")
+
+[node name="Player" parent="." unique_id=675215267 instance=ExtResource("2_7ujdm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Node3D2" parent="." unique_id=41212621 instance=ExtResource("3_beyhg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6802921, 2.6382952, -14.329468)
