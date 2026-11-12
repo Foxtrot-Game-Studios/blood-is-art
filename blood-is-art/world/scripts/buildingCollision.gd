@@ -11,14 +11,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_area_entered(area: Area3D) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	print(get_tree().current_scene)
 	print(worldScene)
 
-	if area.is_in_group("player") and get_tree().current_scene.scene_file_path == "res://world/scenes/world.tscn":
+	if body.name == "Player" and get_tree().current_scene.scene_file_path == "res://world/scenes/world.tscn":
 		print("inside")
 		FadeAnimation.change_scene("res://world/scenes/inside.tscn")
-	if area.is_in_group("player") and get_tree().current_scene.scene_file_path == "res://world/scenes/inside.tscn":
+	if body.name == "Player" and get_tree().current_scene.scene_file_path == "res://world/scenes/inside.tscn":
 		print("inside")
 		FadeAnimation.change_scene("res://world/scenes/world.tscn")
 	pass # Replace with function body.

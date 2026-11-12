@@ -27,3 +27,4 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_7rmln")
 
 [connection signal="area_entered" from="StaticBody3D/Area3D" to="StaticBody3D/Area3D" method="_on_area_entered"]
+[connection signal="body_entered" from="StaticBody3D/Area3D" to="StaticBody3D/Area3D" method="_on_body_entered"]
