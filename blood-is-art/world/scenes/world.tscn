@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://ccxam0svr5614" path="res://player/scenes/player.tscn" id="2_jvmqm"]
 [ext_resource type="Script" uid="uid://c8q7q4gifye4d" path="res://world/scripts/minimap_camera.gd" id="3_65od5"]
 [ext_resource type="PackedScene" uid="uid://djfek3uyfc67c" path="res://player/scenes/testNPC.tscn" id="4_jvmqm"]
-[ext_resource type="PackedScene" uid="uid://c00ykce1tq5it" path="res://dummy.tscn" id="5_65od5"]
-[ext_resource type="Texture2D" uid="uid://boeiggj0cxjlu" path="res://icon.svg" id="6_1qa1k"]
 [ext_resource type="PackedScene" uid="uid://dy1yebe5adiev" path="res://world/scenes/testBuilding.tscn" id="5_65od5"]
+[ext_resource type="Texture2D" uid="uid://boeiggj0cxjlu" path="res://icon.svg" id="6_1qa1k"]
+[ext_resource type="PackedScene" uid="uid://c00ykce1tq5it" path="res://dummy.tscn" id="8_0sksf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65od5"]
 albedo_texture = ExtResource("1_rf5xd")
@@ -69,7 +69,7 @@ script = ExtResource("3_65od5")
 [node name="Node3D" parent="." unique_id=9930169 instance=ExtResource("4_jvmqm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3025727, 1.9589944, 0)
 
-[node name="Dummy" parent="." unique_id=1775106229 instance=ExtResource("5_65od5")]
+[node name="TestBuilding" parent="." unique_id=1775106229 instance=ExtResource("5_65od5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4880257, 1.9589944, 4.1083045)
 
 [node name="Decal" type="Decal" parent="." unique_id=685443309]
@@ -77,6 +77,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5917783, 0, -0.8813213)
 visible = false
 texture_albedo = ExtResource("6_1qa1k")
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [node name="Node3D2" parent="." unique_id=41212621 instance=ExtResource("5_65od5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6802921, 2.6382952, -14.329468)
+
+[node name="Dummy" parent="." unique_id=1845921037 instance=ExtResource("8_0sksf")]
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
